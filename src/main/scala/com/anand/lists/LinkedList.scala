@@ -1,6 +1,7 @@
 package com.anand.lists
 
 import scala.collection.mutable.ArrayBuffer
+import scala.util.control.Breaks._
 
 class LinkedList[T] {
 
@@ -20,6 +21,33 @@ class LinkedList[T] {
       tail = prevTail.next
 		}
 	}
+
+  def remove(data: T) = {
+    var prevNode: ListNode[T] = EmptyListNode
+    var currentNode = head
+
+    breakable {
+      while(currentNode != EmptyListNode) {
+          val nextNode = currentNode.asInstanceOf[LinkedListNode[T]].next
+          if(prevNode == EmptyListNode && currentNode.asInstanceOf[LinkedListNode[T]].data == data) {
+            println(s"deleting the head node")
+            head = nextNode
+            break
+          } else if(prevNode != EmptyListNode && currentNode.asInstanceOf[LinkedListNode[T]].data == data) {
+            // println(s"deleting node with data = $data")
+            prevNode.asInstanceOf[LinkedListNode[T]].next = nextNode
+            if (nextNode == EmptyListNode) {
+              tail = prevNode
+            }
+            break
+          } else {
+            println(s"No match found. Iterate...")
+            prevNode = currentNode
+            currentNode = nextNode
+          }
+      }
+    }
+  }
 
   def printList(): String = {
     val res = new ArrayBuffer[T]()

@@ -17,12 +17,28 @@ object LinkedListApp extends App {
 
   println(listInts.printList())
 
-  listInts.reverseList()
+  // listInts.reverseList()
 
-  println(listInts.printList())
+  // println(listInts.printList())
 
   println(listInts.size())
 
-  listInts.printMiddle()
+  // listInts.printMiddle()
 
+  listInts.remove(3)
+
+  println(listInts.printList())
+
+  listInts.add(3)
+
+  println(listInts.printList())
+
+  listInts.remove(7)
+
+  println(listInts.printList())
+
+  listInts.add(7)
+
+
+  println(listInts.printList())
 }
